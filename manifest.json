@@ -1,0 +1,6 @@
+{
+  "name": "pokemon-api",
+  "short_name": "pokemon-api",
+  "start_url": "/",
+  "display": "standalone"
+}

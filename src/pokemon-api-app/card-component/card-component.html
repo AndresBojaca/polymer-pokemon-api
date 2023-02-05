@@ -1,0 +1,117 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="card-component">
+  <template>
+  <style>
+    .card-container {
+        position: relative;
+        width: 250px;
+        height: 330px;
+    }
+    .card {
+        border-radius: 0.5rem;
+        text-align: center;
+        background-color: rgb(0 0 0 / 50%);
+        color: white;
+        backdrop-filter: blur(20px);
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 250px;
+        transition: all .3s;
+      }
+      .card:hover {
+      position: absolute;
+      cursor: pointer;
+      width: 512px;
+      z-index: 2;
+      background-color: rgb(0 0 0 / 70%);
+    }
+    .card:nth-child(1){
+      /* background-color: red !important; */
+    }
+    .card-info-detail{
+      display: none;
+    }
+    .card-first-detail{
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .card-info-detail span{
+      font-size: 1rem;
+    }
+    .card:hover .card-info-detail{
+      display: block;
+      max-width: 250px;
+    }
+    .card h4, 
+    .card h1{
+      text-transform: capitalize;
+      margin: 0;
+    }
+
+    .card small{
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 400;
+    }
+    .card .image-container{
+      width: 250px;
+      height: 250px;
+      margin: auto;
+    }
+    .card-info{
+      display: flex;
+      align-items: center;
+      padding-bottom: 2rem;
+    }
+    .card img{
+      width: 100%;
+      height: auto;
+    }
+  </style>
+  <div class="card-container">
+    <div class="card">
+      <div class="card-info">
+         <div class="card-first-detail">
+            <div class="image-container">
+              <img src="[[image]]" alt="[[name]]">
+            </div>
+            <small>#[[id]]</small>
+            <h1>[[name]]</h1>
+         </div> 
+        <div class="card-info-detail">
+          <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa ducimus possimus deleniti accusantium quis porro animi beatae impedit error voluptate soluta nobis at iste quibusdam magnam numquam quo, aliquam eligendi.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  </template>
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class CardComponent extends Polymer.Element {
+      static get is() { return 'card-component'; }
+      static get properties() {
+        return {
+            name: {
+            type: String,
+            value: 'Pokemon'
+          },
+            image: {
+            type: String,
+            value: 'camabiar'
+          }
+        };
+      }
+    }
+    window.customElements.define(CardComponent.is, CardComponent);
+  </script>
+</dom-module>

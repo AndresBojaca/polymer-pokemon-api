@@ -1,0 +1,99 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<!-- Iron Ajax -->
+<link rel="import" href="../../../bower_components/iron-ajax/iron-ajax.html">
+<dom-module id="request-component">
+    <template>
+    <!-- First Request -->
+    <iron-ajax auto url="[[url]]" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
+    <dom-repeat items="{{resultsPokeApi}}">
+      <template>
+        <!-- Seccond Request -->
+        <iron-ajax auto url="[[item.url]]" handle-as="json" on-response="handleResponsePokemonDetail" debounce-duration="300"></iron-ajax>
+      </template>
+    </dom-repeat>
+  </template>
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class RequestComponent extends Polymer.Element {
+      static get is() { return 'request-component'; }
+      static get properties() {
+        return {
+          url: {
+            type: String
+          },
+          limit: {
+            type: Number,
+            notify: true
+          },
+          pages: {
+            type: String,
+            value: '1'
+          },
+          nextPageURL:{
+            type: String,
+            notify: true
+          },
+          prevPageURL:{
+            type: String,
+            notify: true  
+          },
+          resultsPokeApi: {
+            type: Array,
+            notify: true
+          },
+          resultsPokemonDetail: {
+            type: Array,
+            value: [],
+            notify: true
+          }
+        };
+      }
+
+      handleResponse(event, request){
+        this.nextPageURL = request?.response.next
+        this.prevPageURL = request?.response.previous
+        this.resultsPokeApi = request?.response.results;
+      }
+
+      handleResponsePokemonDetail(event, request){
+        try{
+          if(request.status === 200){
+
+            //Vars
+            let CustomData = [];
+            let arrayRequesResponse = [request.response];
+
+            //Make Custom Data
+            arrayRequesResponse.map(element => {
+              CustomData.push({
+                id: element.id,
+                name: element.name,
+                image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${element.id}.png`  
+              })
+            });
+            
+            //With push save the prev request values
+            this.resultsPokemonDetail.push(CustomData[0])
+            
+            //Dispatch when request finallize
+            if(this.resultsPokemonDetail.length === this.limit){
+              window.dispatchEvent(new CustomEvent('onRequestComponent', { detail: {
+                info:{next: this.nextPageURL, previous: this.prevPageURL},
+                data: this.resultsPokemonDetail.sort((a,b) => a.id - b.id  ||  a.name.localeCompare(b.name))
+              }}));
+              //Reset the array for new pokemons
+              this.resultsPokemonDetail = []
+            }
+          }
+        } catch (error) {
+          console.error(error)
+        }
+      }
+    } 
+    
+    window.customElements.define(RequestComponent.is, RequestComponent);
+  </script>
+</dom-module>

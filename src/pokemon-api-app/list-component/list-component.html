@@ -1,0 +1,105 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<!-- Request Component -->
+<link rel="import" href="../request-component/request-component.html">
+<!-- Card Component -->
+<link rel="import" href="../card-component/card-component.html">
+
+<dom-module id="list-component">
+  <!-- Request -->
+  <template>
+    <style>
+      .cards-container{
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: .7rem;
+      }
+      .btn-pages-container{
+        margin-top: 2rem;;
+        width: 100%;
+        text-align: right;
+      }
+      .btn-pages-container button{
+        background-color: black;
+        color: white;
+        border: 0;
+        padding: 1rem 2rem;
+        transition: all .3s;
+        cursor: pointer;
+        border-radius: .3rem;
+      }
+      .btn-pages-container button:hover{
+        transform: scale(1.03);
+      }
+    </style>
+    <request-component url="[[url]]" limit="[[limit]]"></request-component>
+    <div class="cards-container">
+      <dom-repeat items="{{pokemons}}">
+        <template>
+          <!-- Card -->
+          <card-component 
+            id="[[item.id]]"
+            name="{{item.name}}" 
+            image="{{item.image}}">
+        </card-component>
+        </template>
+      </dom-repeat>
+    </div>
+      <div class="btn-pages-container">
+        <button on-click="_ChangePage" data-page-type="prev">Prev</button>
+        <button on-click="_ChangePage" data-page-type="next">Next</button>
+      </div>
+  </template>
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class ListComponent extends Polymer.Element {
+      static get is() { return 'list-component'; }
+      static get properties() {
+        return {
+          url:{
+            type: String,
+            notify: true
+          },
+          prevPage:{
+            type: String
+          },
+          nextPage:{
+            type: String
+          },
+          pokemons: {
+            type: Array,
+            value: []
+          }
+        };
+      }
+      constructor(){
+        super();
+        this.limit = 12;
+        this.url = `https://pokeapi.co/api/v2/pokemon?offset=0&limit=${this.limit}`;
+      }
+
+      connectedCallback() {
+        super.connectedCallback()
+        //Get de DATA
+        window.addEventListener('onRequestComponent', (event) => this.handleEvent(event))
+      }
+      handleEvent(event){
+        this.pokemons = event.detail.data;
+        this.nextPage = event.detail.info.next
+        this.prevPage = event.detail.info.previous
+      }
+
+      _ChangePage(event){
+        let type = event.target.getAttribute('data-page-type');
+        this._ChangePageType(type);
+      }
+      _ChangePageType(type){
+        type === 'next' ? this.url = this.nextPage : this.url = this.prevPage
+      }
+
+    }
+    window.customElements.define(ListComponent.is, ListComponent);
+  </script>
+</dom-module>
