@@ -13,21 +13,31 @@
         grid-template-columns: repeat(6, 1fr);
         gap: .7rem;
       }
-      .btn-pages-container{
-        margin-top: 2rem;;
-        width: 100%;
-        text-align: right;
+      .btn-pages-container {
+          width: 90%;
+          text-align: right;
+          display: flex;
+          justify-content: space-between;
+          position: absolute;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          left: 50%;
       }
       .btn-pages-container button{
         background-color: black;
         color: white;
         border: 0;
-        padding: 1rem 2rem;
+        padding: 1rem;
+        width: 70px;
+        height: 70px;
+        font-size: 1.5rem;
         transition: all .3s;
         cursor: pointer;
-        border-radius: .3rem;
+        border-radius: 3rem;
       }
       .btn-pages-container button:hover{
+        background: white;
+        color: black;
         transform: scale(1.03);
       }
     </style>
@@ -35,18 +45,20 @@
     <div class="cards-container">
       <dom-repeat items="{{pokemons}}">
         <template>
-          <!-- Card -->
           <card-component 
-            id="[[item.id]]"
+            id="{{item.id}}"
             name="{{item.name}}" 
-            image="{{item.image}}">
-        </card-component>
+            image="{{item.image}}"
+            abilities="{{item.abilities}}"
+            types="{{item.types}}"
+            stats="{{item.stats}}">
+          </card-component>
         </template>
       </dom-repeat>
     </div>
       <div class="btn-pages-container">
-        <button on-click="_ChangePage" data-page-type="prev">Prev</button>
-        <button on-click="_ChangePage" data-page-type="next">Next</button>
+        <button on-click="_ChangePage" data-page-type="prev">←</button>
+        <button on-click="_ChangePage" data-page-type="next">→</button>
       </div>
   </template>
   <script>
@@ -87,6 +99,7 @@
       }
       handleEvent(event){
         this.pokemons = event.detail.data;
+        console.log(this.pokemons)
         this.nextPage = event.detail.info.next
         this.prevPage = event.detail.info.previous
       }

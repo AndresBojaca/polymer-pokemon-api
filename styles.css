@@ -1,12 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 *{
     box-sizing: border-box;
     margin: 0;
 }
 body{
-    font-family: 'Jost', sans-serif;
-    background: url('https://get.wallhere.com/photo/pokemon-video-games-pixel-art-pixels-1361959.jpg');
+    font-family: 'Montserrat', sans-serif;
+    background: url('./src/pokemon-api-app/assets/img/bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+}
+.card{
+    background-color: yellow;
 }

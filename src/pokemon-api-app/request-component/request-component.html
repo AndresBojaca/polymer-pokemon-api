@@ -71,7 +71,10 @@
               CustomData.push({
                 id: element.id,
                 name: element.name,
-                image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${element.id}.png`  
+                image: element.sprites.other.home.front_default,
+                abilities: element.abilities.map((ability) => ability.ability),
+                types: element.types.map((type) => type.type),
+                stats: element.stats.map((stats) => {return {power: stats.base_stat,stat: stats.stat.name}})
               })
             });
             
@@ -87,6 +90,7 @@
               //Reset the array for new pokemons
               this.resultsPokemonDetail = []
             }
+            console.warn('Request!', request.response)
           }
         } catch (error) {
           console.error(error)

@@ -1,0 +1,15 @@
+{
+  "name": "iron-ajax",
+  "homepage": "https://github.com/PolymerElements/iron-ajax",
+  "version": "3.0.0",
+  "_release": "3.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v3.0.0",
+    "commit": "863d50837e3269f3f65648751a7c42cfd89bbf87"
+  },
+  "_source": "https://github.com/PolymerElements/iron-ajax.git",
+  "_target": "3.0.0",
+  "_originalSource": "iron-ajax",
+  "_direct": true
+}
