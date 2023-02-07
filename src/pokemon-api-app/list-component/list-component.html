@@ -14,14 +14,15 @@
         gap: .7rem;
       }
       .btn-pages-container {
-          width: 90%;
+          width: 98%;
           text-align: right;
           display: flex;
           justify-content: space-between;
-          position: absolute;
+          position: fixed;
           top: 50%;
-          transform: translate(-50%, -50%);
           left: 50%;
+          z-index: 9999;
+          transform: translate(-50%, -50%);
       }
       .btn-pages-container button{
         background-color: black;
@@ -40,6 +41,32 @@
         color: black;
         transform: scale(1.03);
       }
+      @media (max-width: 500px) {
+        .cards-container{
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (min-width: 500px) {
+        .cards-container{
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 930px) {
+        .cards-container{
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (min-width: 1400px) {
+        .cards-container{
+          grid-template-columns: repeat(6, 1fr);
+        }
+      }
+      @media (min-width: 1700px) {
+        .btn-pages-container {
+          width: 90%;
+          position: absolute;
+        }
+      }
     </style>
     <request-component url="[[url]]" limit="[[limit]]"></request-component>
     <div class="cards-container">
@@ -47,6 +74,7 @@
         <template>
           <card-component 
             id="{{item.id}}"
+            index="{{index}}"
             name="{{item.name}}" 
             image="{{item.image}}"
             abilities="{{item.abilities}}"
@@ -99,7 +127,6 @@
       }
       handleEvent(event){
         this.pokemons = event.detail.data;
-        console.log(this.pokemons)
         this.nextPage = event.detail.info.next
         this.prevPage = event.detail.info.previous
       }

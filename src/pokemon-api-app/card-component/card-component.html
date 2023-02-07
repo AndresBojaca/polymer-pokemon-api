@@ -1,103 +1,217 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<!-- Icons -->
+<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../../bower_components/iron-icons/social-icons.html">
 
 <dom-module id="card-component">
   <template>
-  <style>
-    .pokemon-card-container{
-      position: relative;
-      width: 232px;
-      height: 310px;
-    }
-    .pokemon-card {
-      position: absolute;
-      display: flex;
-      border-radius: 0.5rem;
-      text-align: center;
-      background-color: rgb(0 0 0 / 30%);
-      color: white;
-      backdrop-filter: blur(20px);
-      transition: all .3s;
-      padding: 1rem;
-      gap: 1rem;
-      width: 200px;
-    }
-    .pokemon-card:hover {
-      cursor: pointer;
-      width: 445px;
-      background-color: rgb(0 0 0 / 70%);
-      z-index: 9;
-    }
-    .pokemon-card .image-container{
-      width: 200px;
-      height: 200px;
-      margin: auto;
-    }
-    .pokemon-card .name-container{
-      margin: 1rem 0;
-    }
-    .pokemon-card small{
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      font-size: 1rem;
-      color: rgba(255, 255, 255, 0.5);
-      font-weight: 400;
-    }
-    .pokemon-card img{
-      width: 100%;
-      height: auto;
-    }
-    .pokemon-card h4, 
-    .pokemon-card h1{
-      text-transform: capitalize;
-      margin: 0;
-    }
-    .name-container h1{
-      font-size: 1.3rem;
-    }
-    .name-container span{
-      font-size: .7rem;
-      text-transform: capitalize;
-    }
-    .pokemon-card:hover .pokemon-detail{
-      display: block;
-    }
-    .pokemon-detail{
-      display: none;
-      width: 100%;
-      text-align: left;
-      padding-left: 1rem;
-      border-left: 1px solid rgba(255, 255, 255, 0.3);
-    }
-    .data-list{
-      margin: .5rem 0;
-      text-align: left;
-      width: 100%;
-      width: 200px;
-      animation: fadeIn .3s ease-in;
-      color: rgba(255, 255, 255, 0.8);
-      font-size: .7rem;
-      text-transform: capitalize;
-    }
-    .stats{
-      color: darkorange;
-      font-size: .8rem;
-    }
-
-    @keyframes fadeIn{
-      0%{
-        opacity: 0;
+    <style>
+      .pokemon-card-container {
+        position: relative;
+        width: 232px;
+        height: 310px;
       }
-      100%{
-        opacity: 1;
+
+      .pokemon-card {
+        position: absolute;
+        display: flex;
+        border-radius: 0.5rem;
+        text-align: center;
+        background-color: rgb(0 0 0 / 30%);
+        color: white;
+        backdrop-filter: blur(20px);
+        transition: all .3s;
+        padding: 1rem;
+        gap: 1rem;
+        width: 200px;
+        height: 276px;
       }
-    }
 
+      .pokemon-card:hover {
+        cursor: pointer;
+        width: 445px;
+        background-color: rgb(0 0 0 / 70%);
+        z-index: 9;
+      }
 
+      .pokemon-card .image-container {
+        width: 200px;
+        height: 200px;
+        margin: auto;
+      }
 
-  </style>
+      .pokemon-card .name-container {
+        margin: 1rem 0;
+      }
+
+      .pokemon-card small {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-weight: 400;
+      }
+
+      .pokemon-card img {
+        width: 100%;
+        height: auto;
+      }
+
+      .pokemon-card h4,
+      .pokemon-card h1 {
+        text-transform: capitalize;
+        margin: 0;
+      }
+
+      .name-container h1 {
+        font-size: 1.3rem;
+      }
+
+      .name-container span {
+        font-size: .7rem;
+        text-transform: capitalize;
+      }
+
+      .pokemon-card:hover .pokemon-detail {
+        display: block;
+      }
+
+      .pokemon-detail {
+        display: none;
+        width: 100%;
+        text-align: left;
+        padding-left: 1rem;
+        border-left: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .pokemon-detail-flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+      }
+
+      .data-list {
+        margin: .5rem 0;
+        text-align: left;
+        width: 100%;
+        width: 200px;
+        animation: fadeIn .3s ease-in;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: .7rem;
+        text-transform: capitalize;
+      }
+
+      .stats {
+        color: darkorange;
+        font-size: .8rem;
+      }
+
+      iron-icon {
+        width: 1rem;
+        margin-right: 0.2rem;
+        margin-bottom: 0.2rem;
+      }
+
+      /* Logic Index */
+
+      @media (max-width: 500px) {
+        .pokemon-card:hover {
+          cursor: pointer;
+          width: 200px;
+          background-color: rgb(0 0 0 / 70%);
+          z-index: 9;
+          flex-direction: column;
+          height: 600px;
+        }
+        .pokemon-detail {
+          padding-top: 1rem;
+          padding-left: 0rem;
+          border-left: 0px;
+          border-right: 0px;
+          border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        #pokemon-card-11{
+          bottom: 0;
+          left: 0;
+        }
+      }
+      @media (min-width: 500px) and (max-width: 929px) {
+
+        #pokemon-card-1,
+        #pokemon-card-3,
+        #pokemon-card-5,
+        #pokemon-card-7,
+        #pokemon-card-9,
+        #pokemon-card-11 {
+          right: 0;
+          left: inherit;
+          flex-direction: row-reverse;
+        }
+
+        #pokemon-card-1 .pokemon-detail,
+        #pokemon-card-3 .pokemon-detail,
+        #pokemon-card-5 .pokemon-detail,
+        #pokemon-card-7 .pokemon-detail,
+        #pokemon-card-9 .pokemon-detail,
+        #pokemon-card-11 .pokemon-detail {
+          border-left: 0px;
+          border-right: 1px solid rgba(255, 255, 255, 0.3);
+        }
+      }
+
+      @media (min-width: 930px) and (max-width: 1399px)  {
+
+        #pokemon-card-2,
+        #pokemon-card-5,
+        #pokemon-card-8,
+        #pokemon-card-11 {
+          right: 0;
+          left: inherit;
+          flex-direction: row-reverse;
+        }
+
+        #pokemon-card-2 .pokemon-detail,
+        #pokemon-card-5 .pokemon-detail,
+        #pokemon-card-8 .pokemon-detail,
+        #pokemon-card-11 .pokemon-detail {
+          border-left: 0px;
+          border-right: 1px solid rgba(255, 255, 255, 0.3);
+        }
+      }
+
+      @media (min-width: 1400px) {
+        .cards-container {
+          grid-template-columns: repeat(6, 1fr);
+        }
+        #pokemon-card-11,
+        #pokemon-card-5 {
+          right: 0;
+          left: inherit;
+          flex-direction: row-reverse;
+        }
+
+        #pokemon-card-11 .pokemon-detail,
+        #pokemon-card-5 .pokemon-detail {
+          border-left: 0px;
+          border-right: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
     <div class="pokemon-card-container">
-      <div class="pokemon-card">
+      <div class="pokemon-card" id="pokemon-card-[[index]]">
         <div class="pokemon-info">
           <div class="image-container">
             <img src="[[image]]" alt="[[name]]">
@@ -113,38 +227,40 @@
           </div>
         </div>
         <div class="pokemon-detail">
-          <strong>Paintfull Abilities:</strong>
-          <div class="data-list">
+          <div class="pokemon-detail-flex">
+            <strong><iron-icon icon="icons:report-problem"></iron-icon>Paintfull Abilities:</strong>
+            <div class="data-list">
               <dom-repeat items="[[abilities]]">
                 <template>
                   <span>[[item.name]],</span>
                 </template>
               </dom-repeat>
-            </ul>
-          </div>
-          <strong>Pokemon Type:</strong>
-          <div class="data-list">
-            <dom-repeat items="[[types]]">
-              <template>
-                <span>[[item.name]],</span>
-              </template>
-            </dom-repeat>
-          </div>
-          <strong>Stats:</strong>
-          <div class="data-list">
-            <dom-repeat items="[[stats]]">
-              <template>
-                <div class="stats">
-                  <strong>[[item.power]]%</strong>
-                  <span>[[item.stat]]</span>
-                </div>
-              </template>
-            </dom-repeat>
+              </ul>
+            </div>
+            <strong><iron-icon icon="icons:star"></iron-icon>Pokemon Type:</strong>
+            <div class="data-list">
+              <dom-repeat items="[[types]]">
+                <template>
+                  <span>[[item.name]],</span>
+                </template>
+              </dom-repeat>
+            </div>
+            <strong><iron-icon icon="social:poll"></iron-icon>Stats:</strong>
+            <div class="data-list">
+              <dom-repeat items="[[stats]]">
+                <template>
+                  <div class="stats">
+                    <strong>[[item.power]]%</strong>
+                    <span>[[item.stat]]</span>
+                  </div>
+                </template>
+              </dom-repeat>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    </template>
+  </template>
   <script>
     /**
      * @customElement
@@ -182,9 +298,9 @@
           }
         };
       }
-      constructor(){
+      constructor() {
         super();
-        this.shadowRoot.getElementById('card-component');
+        // this.shadowRoot.getElementById('card-component');
       }
     }
     window.customElements.define(CardComponent.is, CardComponent);
